@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "chatUsers")
+@Table(name = "chatusers")
 public class ChatUser {
 
     @Id
@@ -17,14 +17,14 @@ public class ChatUser {
     @Column(name = "name", length = 30, nullable = false)
     private String name;
 
-    @Column(name = "login", length = 30, nullable = false)
+    @Column(name = "login", length = 30, nullable = false, unique = true)
     private String login;
 
     @Column(name = "password", length = 30, nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     public Role getRole() {

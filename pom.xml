@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-framework-version>4.3.3.RELEASE</spring-framework-version>
         <spring.data>1.3.4.RELEASE</spring.data>
-        <hb.manager>4.2.5.Final</hb.manager>
+        <hb.manager>5.2.2.Final</hb.manager>
     </properties>
 
     <dependencies>

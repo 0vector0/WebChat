@@ -10,6 +10,8 @@
 <s:url var="formUrl" value="/registration-handler"/>
 <h1>registration</h1>
 
+${sessionScope.alreadyexist}
+
 <sf:form modelAttribute="user" action="${formUrl}">
 
     <fieldset>

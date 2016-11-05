@@ -1,7 +1,6 @@
 package com.github.mykhalechko.webchat.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -16,14 +15,14 @@ public class Message {
     private Long id;
 
     @Column(name = "body", nullable = false)
-    @Type(type = "text")
+//    @Type(type = "text")
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sender_id", nullable = false)
     private ChatUser sender;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "receiver_id", nullable = false)
     private ChatUser receiver;
 

@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = "rolename")
 public class Role {
 
     @Id
@@ -13,8 +13,8 @@ public class Role {
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id", length = 6, nullable = false)
     private Long id;
-    @Column(name = "role", length = 30, nullable = false)
-    private String role;
+    @Column(name = "rolename", length = 30, nullable = false)
+    private String roleName;
 
     public Long getId() {
         return id;
@@ -24,11 +24,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

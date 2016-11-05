@@ -11,8 +11,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public ModelAndView getRegister() {
         ChatUser user = new ChatUser();
+
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("reg", user);
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("registration");
         return modelAndView;
     }

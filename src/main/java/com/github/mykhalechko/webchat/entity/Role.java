@@ -1,22 +1,20 @@
-package com.github.mikhalechko.webchat.entity;
+package com.github.mykhalechko.webchat.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "blacklist")
-public class BlackList {
+@Table(name = "role")
+public class Role {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id", length = 6, nullable = false)
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "banned_user_id", nullable = false)
-    private ChatUser bannedUser;
+    @Column(name = "role", length = 30, nullable = false)
+    private String role;
 
     public Long getId() {
         return id;
@@ -26,12 +24,11 @@ public class BlackList {
         this.id = id;
     }
 
-    public ChatUser getBannedUser() {
-        return bannedUser;
+    public String getRole() {
+        return role;
     }
 
-    public void setBannedUser(ChatUser bannedUser) {
-        this.bannedUser = bannedUser;
+    public void setRole(String role) {
+        this.role = role;
     }
-
 }

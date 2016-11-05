@@ -1,4 +1,4 @@
-package com.github.mikhalechko.webchat.util;
+package com.github.mykhalechko.webchat.util;
 
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +18,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.github.mikhalechko.webchat.entity")
+@ComponentScan("com.github.mykhalechko.webchat.entities")
 @PropertySource("classpath:app.properties")
-@EnableJpaRepositories("com.github.mikhalechko.webchat.repository")
+@EnableJpaRepositories("com.github.mykhalechko.webchat.repository")
 public class DataConfig {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
@@ -45,7 +45,6 @@ public class DataConfig {
 
         return dataSource;
     }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();

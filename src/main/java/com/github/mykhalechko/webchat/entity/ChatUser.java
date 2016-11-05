@@ -1,4 +1,4 @@
-package com.github.mikhalechko.webchat.entity;
+package com.github.mykhalechko.webchat.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 

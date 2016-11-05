@@ -39,7 +39,7 @@ public class DataConfig {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("reg", "app");
+        messageSource.setBasenames("reg");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

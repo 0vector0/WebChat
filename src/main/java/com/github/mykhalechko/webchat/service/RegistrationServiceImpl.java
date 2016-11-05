@@ -24,10 +24,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public boolean create(ChatUser user) {
-        if (chatUserRepository.saveAndFlush(user) == null) {
-            return false;
-        } else {
+        try {
+            chatUserRepository.saveAndFlush(user);
             return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

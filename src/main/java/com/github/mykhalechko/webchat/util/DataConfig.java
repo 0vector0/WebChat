@@ -1,7 +1,5 @@
 package com.github.mykhalechko.webchat.util;
 
-//import org.hibernate.ejb.HibernatePersistence;
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +9,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
@@ -38,23 +38,24 @@ public class DataConfig {
     private Environment env;
 
     @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("reg");
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
+        dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
+
+        return dataSource;
     }
-
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactoryBean.setDataSource(dataSource());
-//        entityManagerFactoryBean.setPersistenceUnitName("jpa");
-
+        //entityManagerFactoryBean.setPersistenceUnitName("WebChat");
+        entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-//        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
-//
+        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
+
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;
@@ -64,12 +65,12 @@ public class DataConfig {
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+
         return transactionManager;
     }
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.connection.driver_class", "org.postgresql.Driver");
         properties.put("hibernate.connection.driver_class", "org.postgresql.Driver");
         properties.put("hibernate.connection.username", "postgres");
         properties.put("hibernate.connection.password", "root");
@@ -81,5 +82,13 @@ public class DataConfig {
         properties.put("hibernate.connection.characterEncoding", "utf8");
         properties.put("hibernate.connection.useUnicode", "true");
         return properties;
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasenames("reg", "app");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
     }
 }

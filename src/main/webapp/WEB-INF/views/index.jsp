@@ -16,7 +16,8 @@
 
 
 <br>
-<a href= ${s:mvcUrl('R#getRegister')}>Registration</a>
+<%--<a href="${s:mvcUrl('RC#getRegister')}">Registration</a>--%>
+<a href="${pageContext.request.contextPath}/registration">Registration</a>
 <br>
 <button type="button" class="btn btn-default navbar-btn">Sign in</button>
 

@@ -1,18 +1,19 @@
 package com.github.mykhalechko.webchat.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "chatusers")
-public class ChatUser {
+public class ChatUser extends ResourceSupport {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "id", length = 6, nullable = false)
-    private Long id;
+    @Column(name = "userId", length = 6, nullable = false)
+    private Long userId;
 
     @Column(name = "name", length = 30, nullable = false)
     private String name;
@@ -35,12 +36,12 @@ public class ChatUser {
         this.role = role;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserIdId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {

@@ -3,7 +3,6 @@ package com.github.mykhalechko.webchat.util;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -20,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.github.mykhalechko.webchat.entities")
+//@ComponentScan("com.github.mykhalechko.webchat.entities")
 @PropertySource("classpath:app.properties")
 @EnableJpaRepositories("com.github.mykhalechko.webchat.repository")
 public class DataConfig {

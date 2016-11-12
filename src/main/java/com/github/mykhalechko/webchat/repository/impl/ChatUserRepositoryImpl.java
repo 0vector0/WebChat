@@ -17,9 +17,10 @@ public class ChatUserRepositoryImpl implements ChatUserRepositoryCustom {
         System.out.println("ChatUserRepository");
         System.out.println(chatUserDto.getLogin());
         ChatUser u = chatUserRepository.getUserByLogin(chatUserDto.getLogin());
-        System.out.println(u);
+        System.out.println(u.getPassword());
+        System.out.println(chatUserDto.getPassword());
         if (u.getPassword().equals(chatUserDto.getPassword())) {
-            System.out.println(u + "22");
+            System.out.println(u + "222");
             return true;
         }
         return false;

@@ -12,7 +12,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean verifyLogin(ChatUserDto chatUserDto) {
+        System.out.println("Bef");
         if (chatUserRepository.isUserExist(chatUserDto)) {
+            System.out.println("Af");
             return true;
         }
         return false;

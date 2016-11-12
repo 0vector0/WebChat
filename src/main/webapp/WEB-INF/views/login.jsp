@@ -21,14 +21,14 @@
         ;
         function send() {
             $.ajax({
-                        type: 'GET',
+                type: 'POST',
                         contentType: 'application/JSON',
                         url: verifyLoginUrl,
                         dataType: 'json',
                         data: JSON.stringify({
-                            'login': document.getElementById('login'),
-                            'password': document.getElementById('password'),
-                            'isadmin': document.getElementById('is-admin'),
+                            'login': document.getElementById('login').value,
+                            'password': document.getElementById('password').value,
+                            //'isadmin': document.getElementById('is-admin'),
                         }),
                         success: function (data, textstatus, error) {
                             window.location.href = data.links[0].href;
@@ -45,10 +45,10 @@
 <body onload="sendlogin()">
 
 <form>
-    login: <input type="text" userId="login"/>
-    password: <input type="text" userId="password"/>
-    is admin <input type="checkbox" userId="is-admin">
-    <input type="button" onclick="sendlogin()" value="login">
+    login: <input type="text" id="login"/>
+    password: <input type="text" id="password"/>
+    is admin <input type="checkbox" id="is-admin">
+    <input type="button" onclick="send()" value="login">
 </form>
 </body>
 </html>

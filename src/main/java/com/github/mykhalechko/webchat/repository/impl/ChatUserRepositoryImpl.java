@@ -14,8 +14,12 @@ public class ChatUserRepositoryImpl implements ChatUserRepositoryCustom {
 
     @Override
     public boolean isUserExist(ChatUserDto chatUserDto) {
+        System.out.println("ChatUserRepository");
+        System.out.println(chatUserDto.getLogin());
         ChatUser u = chatUserRepository.getUserByLogin(chatUserDto.getLogin());
+        System.out.println(u);
         if (u.getPassword().equals(chatUserDto.getPassword())) {
+            System.out.println(u + "22");
             return true;
         }
         return false;

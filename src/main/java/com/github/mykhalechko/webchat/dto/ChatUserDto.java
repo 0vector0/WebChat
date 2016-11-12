@@ -5,21 +5,21 @@ import org.springframework.hateoas.ResourceSupport;
 
 public class ChatUserDto extends ResourceSupport {
 
-    private String name;
+//    private String name;
 
     private String login;
 
     private String password;
 
-    private boolean isAdmin;
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public String getName() {
-        return name;
-    }
+//    private String isAdmin;
+//
+//    public String getIsAdmin() {
+//        return isAdmin;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
 
     public String getLogin() {
         return login;
@@ -30,4 +30,8 @@ public class ChatUserDto extends ResourceSupport {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return getLogin();
+    }
 }

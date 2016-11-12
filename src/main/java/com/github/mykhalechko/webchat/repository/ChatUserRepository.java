@@ -10,6 +10,6 @@ public interface ChatUserRepository extends JpaRepository<ChatUser, Long>, ChatU
 
     public boolean isUserExist(ChatUserDto chatUserDto);
 
-    @Query("select u from com.github.mykhalechko.webchat.entity.ChatUser u where u.login=:logn")
+    @Query("select u from com.github.mykhalechko.webchat.entity.ChatUser u where u.login=:login")
     public ChatUser getUserByLogin(String login);
 }

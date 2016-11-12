@@ -3,15 +3,15 @@ package com.github.mykhalechko.webchat.controller;
 import com.github.mykhalechko.webchat.entity.ChatUser;
 import com.github.mykhalechko.webchat.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class RegistrationController {
 
     @Autowired

@@ -1,13 +1,12 @@
 package com.github.mykhalechko.webchat.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "chatusers")
-public class ChatUser extends ResourceSupport {
+public class ChatUser {
 
     @Id
     @GeneratedValue(generator = "increment")

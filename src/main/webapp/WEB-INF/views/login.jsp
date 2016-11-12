@@ -10,10 +10,10 @@
                 contentType: 'application/JSON',
                 url: '${urlpath}',
                 dataType:'json',
-                succses: function (data, textstatus, error) {
+                success: function (data, textstatus, error) {
                     alert(JSON.stringify(data));
                 },
-                error:function () {
+                error:function (data) {
                     alert('error');
                 }
             })

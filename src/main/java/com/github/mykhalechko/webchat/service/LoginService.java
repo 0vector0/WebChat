@@ -1,10 +1,10 @@
 package com.github.mykhalechko.webchat.service;
 
 
-import com.github.mykhalechko.webchat.entity.ChatUser;
+import com.github.mykhalechko.webchat.dto.ChatUserDto;
 
 public interface LoginService {
 
-    public boolean verifyLogin(ChatUser chatUser);
+    public boolean verifyLogin(ChatUserDto chatUserDto);
 
 }

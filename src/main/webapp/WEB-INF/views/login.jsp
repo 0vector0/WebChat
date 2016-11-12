@@ -9,14 +9,19 @@
                 type: 'GET',
                 contentType: 'application/JSON',
                 url: '${urlpath}',
+                dataType:'json',
                 succses: function (data, textstatus, error) {
-
+                    alert(JSON.stringify(data));
                 },
+                error:function () {
+                    alert('error');
+                }
             })
         }
     </script>
 </head>
-<body>
+<body onload="sendlogin()">
+
 <form>
     login: <input type="text" userId="login"/>
     password: <input type="text" userId="password"/>

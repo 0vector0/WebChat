@@ -6,6 +6,7 @@ import com.github.mykhalechko.webchat.entity.ChatUser;
 import com.github.mykhalechko.webchat.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,16 +45,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/verifyLogin", method = RequestMethod.POST)
-    public ModelAndView verifyLogin(@RequestBody ChatUserDto chatUserDto, HttpSession session) {
+    public ResourceSupport verifyLogin(@RequestBody ChatUserDto chatUserDto, HttpSession session) throws NoSuchMethodException {
         if (service.verifyLogin(chatUserDto)) {
             session.setAttribute("login", chatUserDto.getLogin());
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("user");
-            return modelAndView;
+            Method chatMethod = ChatController.class.getMethod("chatAccess", HttpSession.class);
+            Link chatLink = ControllerLinkBuilder.linkTo(ChatController.class, chatMethod).withSelfRel();
+            ResourceSupport link = new ResourceSupport();
+            link.add(chatLink);
+            return link;
         } else {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("index");
-            return modelAndView;
+            Method errorMethod = ErrorController.class.getMethod("getError");
+            Link errorLink = ControllerLinkBuilder.linkTo(ErrorController.class, errorMethod).withSelfRel();
+            ResourceSupport link = new ResourceSupport();
+            link.add(errorLink);
+            return link;
         }
     }
 }

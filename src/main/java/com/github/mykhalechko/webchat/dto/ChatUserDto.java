@@ -6,10 +6,13 @@ import org.springframework.hateoas.ResourceSupport;
 public class ChatUserDto extends ResourceSupport {
 
     private String name;
-
     private String login;
-
     private String password;
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
     public String getName() {
         return name;

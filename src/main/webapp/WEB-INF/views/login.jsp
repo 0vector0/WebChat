@@ -4,19 +4,41 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
+        var verifyLoginUrl = null;
         function sendlogin() {
             $.ajax({
                 type: 'GET',
                 contentType: 'application/JSON',
                 url: '${urlpath}',
-                dataType:'json',
+                dataType: 'json',
                 success: function (data, textstatus, error) {
-                    alert(JSON.stringify(data));
+                    verifyLoginUrl = data.links[0].href;
+
                 },
-                error:function (data) {
+                error: function (data) {
                     alert('error');
                 }
             })
+        }
+        ;
+        function send() {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/JSON',
+                url: verifyLoginUrl,
+                dataType: 'json',
+                data: JSON.stringify({
+                    'login': document.getElementById('login'),
+                    'password': document.getElementById('password'),
+                    'is-admin': document.getElementById('is-admin'),
+                }),
+                success: function (data, textstatus, error) {
+                    window.location.href = data.links[0].href;
+                },
+                error: function (data) {
+                    alert('error');
+                }
+            });
         }
     </script>
 </head>
@@ -26,7 +48,7 @@
     login: <input type="text" userId="login"/>
     password: <input type="text" userId="password"/>
     is admin <input type="checkbox" userId="is-admin">
-    <input type="button" onclick="sendlogin()" value="login">
+    <input type="button" onclick="send()" value="login">
 </form>
 </body>
 </html>

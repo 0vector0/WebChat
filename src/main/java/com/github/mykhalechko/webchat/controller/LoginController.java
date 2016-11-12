@@ -1,24 +1,22 @@
 package com.github.mykhalechko.webchat.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mykhalechko.webchat.dto.ChatUserDto;
 import com.github.mykhalechko.webchat.entity.ChatUser;
 import com.github.mykhalechko.webchat.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
-@Controller
+@RestController
 public class LoginController {
 
     @Autowired
@@ -36,19 +34,13 @@ public class LoginController {
 
     //use spring-hateoas
     @RequestMapping(value = "/getLoginLink", method = RequestMethod.GET)
-//    @Consumes(MediaType.APPLICATION_JSON)
-    @ResponseBody
-    public String getChatUserLinkForSendingCredentials() throws NoSuchMethodException, JsonProcessingException {
+    public ChatUserDto getChatUserLinkForSendingCredentials() throws NoSuchMethodException, JsonProcessingException {
         Method verifyLoginMethod = LoginController.class.getMethod("verifyLogin", ChatUserDto.class, HttpSession.class);
         Link verifyLoginLink = ControllerLinkBuilder.linkTo(LoginController.class, verifyLoginMethod).withSelfRel();
         System.out.println(verifyLoginLink.getHref());
         ChatUserDto chatUser = new ChatUserDto();
         chatUser.add(verifyLoginLink);
-        System.out.println(chatUser);
-        ObjectMapper mapper = new ObjectMapper();
-        String s = mapper.writeValueAsString(chatUser);
-        System.out.println(s);
-        return s;
+        return chatUser;
     }
 
     @RequestMapping(value = "/verifyLogin", method = RequestMethod.POST)

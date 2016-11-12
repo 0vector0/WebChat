@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -36,14 +37,13 @@ public class LoginController {
     //use spring-hateoas
     @RequestMapping(value = "/getLoginLink", method = RequestMethod.GET)
 //    @Consumes(MediaType.APPLICATION_JSON)
-//    @ResponseBody
+    @ResponseBody
     public String getChatUserLinkForSendingCredentials() throws NoSuchMethodException, JsonProcessingException {
         Method verifyLoginMethod = LoginController.class.getMethod("verifyLogin", ChatUserDto.class, HttpSession.class);
         Link verifyLoginLink = ControllerLinkBuilder.linkTo(LoginController.class, verifyLoginMethod).withSelfRel();
         System.out.println(verifyLoginLink.getHref());
         ChatUserDto chatUser = new ChatUserDto();
         chatUser.add(verifyLoginLink);
-        chatUser.setLogin("test");
         System.out.println(chatUser);
         ObjectMapper mapper = new ObjectMapper();
         String s = mapper.writeValueAsString(chatUser);

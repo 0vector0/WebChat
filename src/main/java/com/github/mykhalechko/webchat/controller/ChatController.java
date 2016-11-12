@@ -13,9 +13,12 @@ public class ChatController {
     @RequestMapping(value = "/chat", method = RequestMethod.GET)
     public ModelAndView chatAccess(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
+        System.out.println("login " + session.getAttribute("login"));
         if (session.getAttribute("login") != null) {
+            System.out.println("login121212 " + session.getAttribute("login"));
+
             modelAndView.addObject("user", session.getAttribute("login"));
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("chat");
         } else {
             modelAndView.setViewName("error");
         }

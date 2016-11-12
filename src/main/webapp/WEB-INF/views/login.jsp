@@ -9,14 +9,36 @@
                 type: 'GET',
                 contentType: 'application/JSON',
                 url: '${urlpath}',
-                dataType:'json',
+                dataType: 'json',
                 success: function (data, textstatus, error) {
-                    alert(JSON.stringify(data));
+                    verifyLoginUrl = data.links[0].href;
                 },
-                error:function (data) {
+                error: function (data) {
                     alert('error');
                 }
             })
+        }
+        ;
+        function send() {
+            $.ajax({
+                        type: 'GET',
+                        contentType: 'application/JSON',
+                        url: verifyLoginUrl,
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            'login': document.getElementById('login'),
+                            'password': document.getElementById('password'),
+                            'isadmin': document.getElementById('is-admin'),
+                        }),
+                        success: function (data, textstatus, error) {
+                            window.location.href = data.links[0].href;
+                        }
+                        ,
+                        error: function (data) {
+                            alert('error');
+                        }
+                    }
+            )
         }
     </script>
 </head>

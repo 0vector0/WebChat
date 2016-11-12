@@ -11,6 +11,12 @@ public class ChatUserDto extends ResourceSupport {
 
     private String password;
 
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
     public String getName() {
         return name;
     }

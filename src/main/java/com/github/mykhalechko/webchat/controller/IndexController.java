@@ -5,11 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView getIndex() {
+    public ModelAndView getIndex(HttpSession session) {
+        session.setAttribute("js", "../../../js/login.js");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;

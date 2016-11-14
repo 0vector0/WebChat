@@ -18,6 +18,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         System.out.println(" onStartup");
 
         WebApplicationContext context = getContext();
+
         servletContext.addListener(new ContextLoaderListener(context));
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
@@ -26,9 +27,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.register(com.github.mykhalechko.webchat.util.DataConfig.class);
         context.setConfigLocation("com.github.mykhalechko.webchat.util");
         return context;
     }
-
 
 }

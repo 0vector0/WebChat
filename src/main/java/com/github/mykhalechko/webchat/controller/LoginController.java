@@ -46,18 +46,21 @@ public class LoginController {
 
     @RequestMapping(value = "/verifyLogin", method = RequestMethod.POST)
     public ResourceSupport verifyLogin(@RequestBody ChatUserDto chatUserDto, HttpSession session) throws NoSuchMethodException {
+        System.out.println("Before");
+        System.out.println(chatUserDto.toString());
         if (service.verifyLogin(chatUserDto)) {
+            System.out.println("After");
             session.setAttribute("login", chatUserDto.getLogin());
             Method chatMethod = ChatController.class.getMethod("chatAccess", HttpSession.class);
-            Link chatLink = ControllerLinkBuilder.linkTo(ChatController.class, chatMethod).withSelfRel();
+            Link chatinLink = ControllerLinkBuilder.linkTo(ChatController.class, chatMethod).withSelfRel();
             ResourceSupport link = new ResourceSupport();
-            link.add(chatLink);
+            link.add(chatinLink);
             return link;
         } else {
-            Method errorMethod = ErrorController.class.getMethod("getError");
-            Link errorLink = ControllerLinkBuilder.linkTo(ErrorController.class, errorMethod).withSelfRel();
+            Method chatMethod = ErrorController.class.getMethod("getError");
+            Link chatinLink = ControllerLinkBuilder.linkTo(ErrorController.class, chatMethod).withSelfRel();
             ResourceSupport link = new ResourceSupport();
-            link.add(errorLink);
+            link.add(chatinLink);
             return link;
         }
     }

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-
     @Autowired
     private ChatUserRepository chatUserRepository;
 
     @Override
     public boolean verifyLogin(ChatUserDto chatUserDto) {
-
+        System.out.println("Bef");
         if (chatUserRepository.isUserExist(chatUserDto)) {
+            System.out.println("Af");
             return true;
         }
         return false;

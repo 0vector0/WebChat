@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="template/head.jsp"/>
-<body>
+<body onload="sendlogin()">
 
 <div class="site-wrapper">
 
@@ -26,7 +26,7 @@
                 <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download,
                     edit the text, and add your own fullscreen background photo to make it your own.</p>
                 <p class="lead">
-                    <a href="/login" class="btn btn-lg btn-secondary">Sign-in</a>
+                    <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-lg btn-secondary">Sign-in</a>
                 </p>
             </div>
 

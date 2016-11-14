@@ -21,7 +21,7 @@
         ;
         function send() {
             $.ajax({
-                type: 'POST',
+                        type: 'POST',
                         contentType: 'application/JSON',
                         url: verifyLoginUrl,
                         dataType: 'json',

@@ -107,7 +107,18 @@
             <artifactId>spring-hateoas</artifactId>
             <version>0.21.0.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+            <version>4.2.2.Final</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+            <version>4.2.2.Final</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>WebChat</finalName>

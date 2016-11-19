@@ -16,7 +16,6 @@ public class MySocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage text) throws IOException {
 
 
-
         String message = text.getPayload();
         String[] messageArray = message.split(":");
 
@@ -38,19 +37,12 @@ public class MySocketHandler extends TextWebSocketHandler {
             return;
         }
         if (messageArray[0].equals("list")) {
-            System.out.println("list");
 
-            try {
-                StringBuilder output = new StringBuilder("list:");
-                for (String name : clients.keySet()) {
-                    output.append(name).append("\n");
-                }
-                session.sendMessage(new TextMessage(output.toString()));
-            } catch (Exception e) {
-                e.printStackTrace();
-
+            StringBuilder output = new StringBuilder("list:");
+            for (String name : clients.keySet()) {
+                output.append(name).append(";");
             }
-            System.out.println("list2");
+            session.sendMessage(new TextMessage(output.toString()));
             return;
         }
 

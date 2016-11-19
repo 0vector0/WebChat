@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>Chat</title>
-
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
     <script type="text/javascript">
-        var socket = new WebSocket("ws://localhost:8080/app");
+//        var socket = new WebSocket("ws://localhost:8080/app");
+        var socket = new SockJS('/app');
         var flag = null;
         socket.onopen = function () {
             registrationUser();
@@ -37,7 +38,7 @@
         }
 
         function sendList() {
-            socket.send('list:hello');
+            socket.send('list:');
         }
 
         function registrationUser() {

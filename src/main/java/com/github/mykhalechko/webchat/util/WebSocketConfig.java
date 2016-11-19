@@ -16,7 +16,7 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(handler(), "/app");
+        webSocketHandlerRegistry.addHandler(handler(), "/app").withSockJS();
     }
 
     @Bean

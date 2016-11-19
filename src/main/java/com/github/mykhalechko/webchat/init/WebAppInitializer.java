@@ -18,6 +18,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         System.out.println(" onStartup");
 
         WebApplicationContext context = getContext();
+        //logger
         servletContext.addListener(new ContextLoaderListener(context));
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);

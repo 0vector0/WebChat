@@ -5,8 +5,19 @@
     <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript">
+
         var socket = new SockJS('${socketUrl}');
         var flag = null;
+        var activeUsers = null;
+
+        var app = angular.module('webChat', []);
+        app.controller('activeUsers', function ($scope) {
+            $scope.myFun = function (activeUsers) {
+                $scope.users = activeUsers;
+            };
+//            alert(activeUsers);
+        });
+
         socket.onopen = function () {
             registrationUser();
             flag = window.setInterval(sendList, 2000);
@@ -23,8 +34,11 @@
             var message = event.data;
             var messageArray = message.split(':');
             if (messageArray[0] == 'list') {
-                var users = messageArray[1].split(';');
-                document.getElementById('active-users').value = messageArray[1];
+                activeUsers = JSON.parse(messageArray[1]);
+                var scope = angular.element(document.getElementById('mywebchat')).scope();
+                scope.$apply(function () {
+                    scope.myFun(activeUsers);
+                });
             } else {
                 var text = document.getElementById("output").value;
                 text = text + "\n" + message;
@@ -52,14 +66,24 @@
 <body>
 <h1>Chat</h1>
 <form>
-    <div ng-app="webChat" id="active-users">
-
+    <div ng-app="webChat" ng-controller="activeUsers" id="mywebchat">
+        <ul>
+            <li ng-repeat="user in users">{{user}}</li>
+        </ul>
     </div>
-    <textarea id="output"></textarea>
-    <%--<textarea id="active-users"></textarea>--%>
+    <br/>
+    <label for="output">Chat room:</label>
+    <br/>
+    <textarea id="output" rows="10" cols="60"></textarea>
+
+    <br/>
+
+    <%--<label for="active-users">Users:</label><textarea id="active-users" aria-label="users"></textarea>--%>
+    <label for="input">Input your message:</label>
+    <br/>
     <input type="text" id="input"/>
     <input type="button" onclick="send()" name="Send" value="Send"/>
-    <input type="button" onclick="broadcast()" name="Broadcast" value="Broadcast"/>
+    <input type="button" onclick="broadcast()" name="Send" value="Send to All"/>
 </form>
 </body>
 </html>

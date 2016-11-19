@@ -1,11 +1,14 @@
 package com.github.mykhalechko.webchat.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MySocketHandler extends TextWebSocketHandler {
@@ -38,11 +41,11 @@ public class MySocketHandler extends TextWebSocketHandler {
         }
         if (messageArray[0].equals("list")) {
 
-            StringBuilder output = new StringBuilder("list:");
-            for (String name : clients.keySet()) {
-                output.append(name).append(";");
-            }
-            session.sendMessage(new TextMessage(output.toString()));
+            List<String> clientsList = new ArrayList<>(clients.keySet());
+            ObjectMapper objectMapper = new ObjectMapper();
+            String output = objectMapper.writeValueAsString(clientsList);
+            System.out.println(output);
+            session.sendMessage(new TextMessage("list:" + output));
             return;
         }
 

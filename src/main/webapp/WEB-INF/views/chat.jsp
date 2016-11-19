@@ -8,7 +8,7 @@
         var flag = null;
         socket.onopen = function () {
             registrationUser();
-//            flag = window.setInterval(sendList, 2000);
+            flag = window.setInterval(sendList, 2000);
         };
         socket.onclose = function (event) {
             window.clearInterval(flag);

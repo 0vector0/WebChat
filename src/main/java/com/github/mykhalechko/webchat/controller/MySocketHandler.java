@@ -48,7 +48,10 @@ public class MySocketHandler extends TextWebSocketHandler {
                 session.sendMessage(new TextMessage(output.toString()));
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
+            System.out.println("list2");
+            return;
         }
 
         String name = null;

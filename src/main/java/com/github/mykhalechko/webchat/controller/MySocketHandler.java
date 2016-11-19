@@ -27,6 +27,8 @@ public class MySocketHandler extends TextWebSocketHandler {
         String[] messageArray = message.split(":");
 
         if (messageArray[0].equals("name")) {
+
+            // TODO session.isOpen();
             clients.put(messageArray[1], session);
             List<String> messages = redisConnect.getJedis().lrange("broadcast", 0, -1);
             for (String s : messages) {

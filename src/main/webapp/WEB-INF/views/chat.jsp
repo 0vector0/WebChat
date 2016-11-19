@@ -9,13 +9,19 @@
         var socket = new SockJS('${socketUrl}');
         var flag = null;
         var activeUsers = null;
+        //        var selectedUser = null;
 
         var app = angular.module('webChat', []);
         app.controller('activeUsers', function ($scope) {
+//            $scope.count = '';
             $scope.myFun = function (activeUsers) {
                 $scope.users = activeUsers;
             };
-//            alert(activeUsers);
+            $scope.changeCount = function (user) {
+//                $scope.count = user;
+//               selectedUser = user;
+                document.getElementById('input').value = user + ':';
+            }
         });
 
         socket.onopen = function () {
@@ -47,7 +53,9 @@
         };
 
         function send() {
+
             socket.send(document.getElementById("input").value);
+
         }
 
         function sendList() {
@@ -60,6 +68,7 @@
         function broadcast() {
             socket.send('broadcast:' + document.getElementById("input").value);
         }
+
     </script>
 
 </head>
@@ -68,8 +77,9 @@
 <form>
     <div ng-app="webChat" ng-controller="activeUsers" id="mywebchat">
         <ul>
-            <li ng-repeat="user in users">{{user}}</li>
+            <li ng-repeat="user in users" ng-click="changeCount(user)">{{user}}</li>
         </ul>
+        <%--<p>{{count}}</p>--%>
     </div>
     <br/>
     <label for="output">Chat room:</label>
@@ -85,5 +95,6 @@
     <input type="button" onclick="send()" name="Send" value="Send"/>
     <input type="button" onclick="broadcast()" name="Send" value="Send to All"/>
 </form>
+
 </body>
 </html>

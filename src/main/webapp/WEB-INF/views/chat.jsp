@@ -5,7 +5,7 @@
     <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
     <script type="text/javascript">
 //        var socket = new WebSocket("ws://localhost:8080/app");
-        var socket = new SockJS('/app');
+        var socket = new SockJS('${socketUrl}');
         var flag = null;
         socket.onopen = function () {
             registrationUser();

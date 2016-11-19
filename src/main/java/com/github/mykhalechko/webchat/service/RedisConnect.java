@@ -12,10 +12,12 @@ public class RedisConnect {
     @Resource
     private Environment env;
 
-//    private Jedis jedis = new Jedis(env.getRequiredProperty("redis.url"));
-    private Jedis jedis = new Jedis("localhost");
+    private Jedis jedis;
 
     public Jedis getJedis() {
+        if (jedis == null) {
+            jedis = new Jedis(env.getRequiredProperty("redis.url"));
+        }
         return jedis;
     }
 }

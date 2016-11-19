@@ -9,17 +9,14 @@
         var socket = new SockJS('${socketUrl}');
         var flag = null;
         var activeUsers = null;
-        //        var selectedUser = null;
 
+        //        angular
         var app = angular.module('webChat', []);
         app.controller('activeUsers', function ($scope) {
-//            $scope.count = '';
             $scope.myFun = function (activeUsers) {
                 $scope.users = activeUsers;
             };
             $scope.changeCount = function (user) {
-//                $scope.count = user;
-//               selectedUser = user;
                 document.getElementById('input').value = user + ':';
             }
         });
@@ -36,6 +33,7 @@
                 alert("Error!");
             }
         };
+
         socket.onmessage = function (event) {
             var message = event.data;
             var messageArray = message.split(':');
@@ -68,7 +66,6 @@
         function broadcast() {
             socket.send('broadcast:' + document.getElementById("input").value);
         }
-
     </script>
 
 </head>
@@ -79,7 +76,6 @@
         <ul>
             <li ng-repeat="user in users" ng-click="changeCount(user)">{{user}}</li>
         </ul>
-        <%--<p>{{count}}</p>--%>
     </div>
     <br/>
     <label for="output">Chat room:</label>
@@ -87,8 +83,6 @@
     <textarea id="output" rows="10" cols="60"></textarea>
 
     <br/>
-
-    <%--<label for="active-users">Users:</label><textarea id="active-users" aria-label="users"></textarea>--%>
     <label for="input">Input your message:</label>
     <br/>
     <input type="text" id="input"/>

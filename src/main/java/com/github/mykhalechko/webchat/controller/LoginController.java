@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     LoginService service;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", name = "getLogin", method = RequestMethod.GET)
     public ModelAndView getLogin() {
         ChatUser user = new ChatUser();
 

@@ -11,7 +11,7 @@
                     <h3 class="masthead-brand">WeChat</h3>
                     <nav class="nav nav-masthead">
                         <a class="nav-link active" href="/">Home</a>
-                        <a class="nav-link" href="/registration">Register</a>
+                        <a class="nav-link" href="${s:mvcUrl('getRegister').build()}">Register</a>
                         <a class="nav-link" href="#">Contact</a>
                     </nav>
                 </div>

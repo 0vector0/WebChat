@@ -37,6 +37,7 @@
                 }
         )
     }</script>
+    <script type="text/javascript" src="../../../js/chat.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link media="all" type="text/css" rel="stylesheet" href="../../../css/login-modal.css">

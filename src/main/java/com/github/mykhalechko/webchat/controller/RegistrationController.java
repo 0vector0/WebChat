@@ -17,7 +17,7 @@ public class RegistrationController {
     @Autowired
     RegistrationService service;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", name = "getRegister", method = RequestMethod.GET)
     public ModelAndView getRegister() {
         return service.getRegister();
     }

@@ -9,12 +9,9 @@
                 <h4 class="modal-title" id="myModalLabel">Login title</h4>
             </div>
             <div class="modal-body">
-
-
                 <div class="login-container animated fadeInDown bootstrap snippets">
                     <div class="loginbox bg-white">
                         <div class="loginbox-title">SIGN IN</div>
-
                         <div class="loginbox-textbox">
                             <label><s:message code="reg.login"/>:</label>
                             <input type="text" class="form-control" id="login" placeholder="Login">

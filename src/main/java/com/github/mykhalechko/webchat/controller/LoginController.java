@@ -25,8 +25,6 @@ public class LoginController {
 
     @RequestMapping(value = "/login", name = "getLogin", method = RequestMethod.GET)
     public ModelAndView getLogin() {
-        ChatUser user = new ChatUser();
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("urlpath", "/getLoginLink");
         modelAndView.setViewName("login");
@@ -34,6 +32,7 @@ public class LoginController {
     }
 
     //use spring-hateoas
+    //получение ссылки для проверки пароля
     @RequestMapping(value = "/getLoginLink", method = RequestMethod.GET)
     public ChatUserDto getChatUserLinkForSendingCredentials() throws NoSuchMethodException, JsonProcessingException {
         Method verifyLoginMethod = LoginController.class.getMethod("verifyLogin", ChatUserDto.class, HttpSession.class);
@@ -44,6 +43,7 @@ public class LoginController {
         return chatUser;
     }
 
+    //проверка логина и пароля
     @RequestMapping(value = "/verifyLogin", method = RequestMethod.POST)
     public ResourceSupport verifyLogin(@RequestBody ChatUserDto chatUserDto, HttpSession session) throws NoSuchMethodException {
         System.out.println("Before");

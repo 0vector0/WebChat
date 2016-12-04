@@ -31,6 +31,8 @@
                             //'isadmin': document.getElementById('is-admin'),
                         }),
                         success: function (data, textstatus, error) {
+                            console.log(JSON.stringify(data));
+
                             window.location.href = data.links[0].href;
                         }
                         ,

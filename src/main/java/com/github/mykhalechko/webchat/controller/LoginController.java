@@ -25,6 +25,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", name = "getLogin", method = RequestMethod.GET)
     public ModelAndView getLogin() {
+        System.out.println("getLogin()");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("urlpath", "/getLoginLink");
         modelAndView.setViewName("login");

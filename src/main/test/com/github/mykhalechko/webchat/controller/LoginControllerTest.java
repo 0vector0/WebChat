@@ -1,9 +1,12 @@
 package com.github.mykhalechko.webchat.controller;
 
 import com.github.mykhalechko.webchat.service.LoginService;
+import com.github.mykhalechko.webchat.util.ApplicationConfig;
+import com.github.mykhalechko.webchat.util.JSPConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContext;
@@ -14,30 +17,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import org.junit.*;
-import org.junit.runner.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.*;
-import org.springframework.boot.test.mock.mockito.*;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = {TestContext.class, WebApplicationContext.class})
-//@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AnnotationConfigWebContextLoader.class})
-@WebAppConfiguration
 
-@WebMvcTest(LoginController.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {AnnotationConfigWebContextLoader.class, ApplicationConfig.class})
+@WebAppConfiguration
 public class LoginControllerTest {
 
 
@@ -47,17 +35,15 @@ public class LoginControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setup() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .build();
+    public void before() {
+        MockitoAnnotations.initMocks(this);
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).dispatchOptions(true).build();
     }
 
     @Test
     public void getLogin() throws Exception {
-
         mockMvc.perform(MockMvcRequestBuilders.get("/login"))
-        .andExpect(status().isOk());
+                .andExpect(status().isOk());
     }
 
 }

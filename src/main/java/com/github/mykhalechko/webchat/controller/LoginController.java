@@ -38,9 +38,9 @@ public class LoginController {
         Method verifyLoginMethod = LoginController.class.getMethod("verifyLogin", ChatUserDto.class, HttpSession.class);
         Link verifyLoginLink = ControllerLinkBuilder.linkTo(LoginController.class, verifyLoginMethod).withSelfRel();
         System.out.println(verifyLoginLink.getHref());
-        ChatUserDto chatUser = new ChatUserDto();
-        chatUser.add(verifyLoginLink);
-        return chatUser;
+        ChatUserDto chatUserDto = new ChatUserDto();
+        chatUserDto.add(verifyLoginLink);
+        return chatUserDto;
     }
 
     //проверка логина и пароля
